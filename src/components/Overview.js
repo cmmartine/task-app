@@ -1,7 +1,7 @@
 function ShowTasks({tasks}){
     return (
       <div>
-        <p>Tasks: {tasks}</p>
+        <ul>{tasks}</ul>
       </div>
     );
 }

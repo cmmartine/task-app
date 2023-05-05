@@ -19,7 +19,7 @@ class App extends Component{
       <>
         <input type="text" className="task-input" id="task-input"/>
         <input type="submit" className="task-submit" value="Create Task" onClick={this.addTask} />
-        <ShowTasks tasks={this.state.tasks} />
+        <ShowTasks tasks= {this.state.tasks.map(task => <li key={this.state.tasks.indexOf(task)}>{task}</li>)} />
       </>
     );
   }
