@@ -1,12 +1,14 @@
 
 
-function ShowTasks({tasks}){
+function ShowTasks({tasks, onDeleteClick}){
     return (
-      <div>
-        <ul>
-          {tasks}
-        </ul>
-      </div>
+      <ul>
+        {tasks.map(task =>
+          <li key={task.id}>
+            {tasks.indexOf(task) + 1}. {task.text} <button onClick={() => onDeleteClick(task.id)}>Delete</button>
+          </li>
+        )}
+      </ul>
     );
 }
 

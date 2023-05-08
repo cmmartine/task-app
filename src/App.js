@@ -14,6 +14,7 @@ class App extends Component{
     };
     this.handleChange = this.handleChange.bind(this);
     this.submitTask = this.submitTask.bind(this);
+    this.deleteTask = this.deleteTask.bind(this);
   }
 
   handleChange = (e) => {
@@ -49,11 +50,7 @@ class App extends Component{
       <>
         <input type="text" className="task-input" id="task-input" onChange={this.handleChange} value={task.text}/>
         <input type="submit" className="task-submit" value="Create Task" onClick={this.submitTask} />
-        <ShowTasks tasks={tasks.map(task => 
-            <li key={task.id}>
-              {tasks.indexOf(task) + 1}. {task.text} <button onClick={() => this.deleteTask(task.id)}>Delete</button>
-            </li>
-          )}/>
+        <ShowTasks tasks={tasks} onDeleteClick={this.deleteTask}/>
       </>
     );
   }
