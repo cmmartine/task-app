@@ -31,10 +31,16 @@ class App extends Component{
       tasks: this.state.tasks.concat(this.state.task),
       task: {
         text: '',
-        id: uniqid()
+        id: uniqid(),
       },
     });
   };
+
+  deleteTask(currentTaskID) {
+    this.setState({
+      tasks: this.state.tasks.filter(task => task.id !== currentTaskID)
+    })
+  }
 
   render() {
     const { task, tasks } = this.state;
@@ -43,7 +49,11 @@ class App extends Component{
       <>
         <input type="text" className="task-input" id="task-input" onChange={this.handleChange} value={task.text}/>
         <input type="submit" className="task-submit" value="Create Task" onClick={this.submitTask} />
-        <ShowTasks allTasks={tasks} />
+        <ShowTasks tasks={tasks.map(task => 
+            <li key={task.id}>
+              {tasks.indexOf(task) + 1}. {task.text} <button onClick={() => this.deleteTask(task.id)}>Delete</button>
+            </li>
+          )}/>
       </>
     );
   }

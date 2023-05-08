@@ -1,12 +1,10 @@
-function ShowTasks({allTasks}){
+
+
+function ShowTasks({tasks}){
     return (
       <div>
         <ul>
-          {allTasks.map(task => {
-            return <li key={task.id}>
-              {allTasks.indexOf(task) + 1}. {task.text}
-            </li>
-          })}
+          {tasks}
         </ul>
       </div>
     );
