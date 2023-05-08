@@ -48,8 +48,11 @@ class App extends Component{
 
     return (
       <>
-        <input type="text" className="task-input" id="task-input" onChange={this.handleChange} value={task.text}/>
-        <input type="submit" className="task-submit" value="Create Task" onClick={this.submitTask} />
+        <form>
+          <label htmlFor="task-input">Add a task:</label>
+          <input type="text" className="task-input" id="task-input" onChange={this.handleChange} value={task.text}/>
+          <input type="submit" className="task-submit" value="Create Task" onClick={this.submitTask} />
+        </form>
         <ShowTasks tasks={tasks} onDeleteClick={this.deleteTask}/>
       </>
     );
