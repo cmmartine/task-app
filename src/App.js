@@ -1,25 +1,49 @@
 import React, { Component } from 'react';
 import ShowTasks from './components/Overview';
+import uniqid from 'uniqid';
 
 class App extends Component{
-  constructor(props) {
-    super(props);
-    this.state = { tasks: ['Task one', 'Task Two'] };
-    this.addTask=this.addTask.bind(this);
+  constructor() {
+    super();
+    this.state = { 
+      task: { 
+        text: '',
+        id: uniqid() 
+      }, 
+      tasks: [] 
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.submitTask = this.submitTask.bind(this);
   }
 
-  addTask() {
-    let inputText = document.getElementById('task-input');
-    this.setState({tasks: [...this.state.tasks, inputText.value] });
-    inputText.value = '';
-  }
+  handleChange = (e) => {
+    this.setState({
+      task: {
+        text: e.target.value,
+        id: this.state.task.id,
+      },
+    });
+  };
+
+  submitTask = (e) => {
+    e.preventDefault();
+    this.setState({
+      tasks: this.state.tasks.concat(this.state.task),
+      task: {
+        text: '',
+        id: uniqid()
+      },
+    });
+  };
 
   render() {
+    const { task, tasks } = this.state;
+
     return (
       <>
-        <input type="text" className="task-input" id="task-input"/>
-        <input type="submit" className="task-submit" value="Create Task" onClick={this.addTask} />
-        <ShowTasks tasks= {this.state.tasks.map(task => <li key={this.state.tasks.indexOf(task)}>{task}</li>)} />
+        <input type="text" className="task-input" id="task-input" onChange={this.handleChange} value={task.text}/>
+        <input type="submit" className="task-submit" value="Create Task" onClick={this.submitTask} />
+        <ShowTasks allTasks={tasks} />
       </>
     );
   }

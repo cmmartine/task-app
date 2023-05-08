@@ -1,7 +1,7 @@
-function ShowTasks({tasks}){
+function ShowTasks({allTasks}){
     return (
       <div>
-        <ul>{tasks}</ul>
+        <ul>{allTasks.map(task => <li key={task.id}>{task.text}</li>)}</ul>
       </div>
     );
 }
